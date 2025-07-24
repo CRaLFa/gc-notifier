@@ -14,11 +14,9 @@ func init() {
 }
 
 func getGroupID(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
 	cb, err := webhook.ParseRequest(os.Getenv("LINE_CHANNEL_SECRET"), r)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to parse webhook request: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Failed to parse Webhook request: %v\n", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
